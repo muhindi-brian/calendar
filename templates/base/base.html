@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/static/vendor/css/bootstrap.min.css">
+
+    <!-- JQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    <script src="/static/vendor/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="/static/vendor/img/bootstrap-icons.css">
+
+    <!-- google fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet"> -->
+
+
+    <!-- Custom files -->
+    <script src="/static/public/js/style.js"></script>
+    <link rel="stylesheet" href="/static/public/css/style.css">
+    <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/static/public/img/icons8-event.gif">
+    <!-- Google Picker API Script -->
+    <script type="text/javascript">
+        // The Browser API key obtained from the Google API Console.
+        // Replace with your own Browser API key, or your own key.
+        let developerKey = 'AIzaSyAKnTaxoWSyz83VbsrjUnZhsE0i2RvC4PU';
+
+        // The Client ID obtained from the Google API Console. Replace with your own Client ID.
+        let clientId = "214476930690-kiti0kdnuobd39542occuns1u4t0uflb.apps.googleusercontent.com"
+
+        // Replace with your own project number from console.developers.google.com.
+        // See "Project number" under "IAM & Admin" > "Settings"
+        // let appId = "calender-app-310708";
+        let appId = "214476930690";
+
+        // Scope to use to access user's Drive items.
+        let scope = ['https://www.googleapis.com/auth/drive.file'];
+
+        let pickerApiLoaded = false;
+        let oauthToken;
+
+        // Use the Google API Loader script to load the google.picker script.
+        function loadPicker() {
+            gapi.load('auth', { 'callback': onAuthApiLoad });
+            gapi.load('picker', { 'callback': onPickerApiLoad });
+        }
+
+        function onAuthApiLoad() {
+            window.gapi.auth.authorize(
+                {
+                    'client_id': clientId,
+                    'scope': scope,
+                    'immediate': false
+                },
+                handleAuthResult);
+        }
+
+        function onPickerApiLoad() {
+            pickerApiLoaded = true;
+            createPicker();
+        }
+
+        function handleAuthResult(authResult) {
+            if (authResult && !authResult.error) {
+                oauthToken = authResult.access_token;
+                createPicker();
+            }
+        }
+
+        // Create and render a Picker object for searching images.
+        function createPicker() {
+            if (pickerApiLoaded && oauthToken) {
+                let view = new google.picker.View(google.picker.ViewId.DOCS);
+                view.setMimeTypes(); //"image/png,image/jpeg,image/jpg"
+                let picker = new google.picker.PickerBuilder()
+                    .enableFeature(google.picker.Feature.NAV_HIDDEN)
+                    .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+                    .setAppId(appId)
+                    .setOAuthToken(oauthToken)
+                    .addView(view)
+                    .addView(new google.picker.DocsUploadView().setIncludeFolders(true))
+                    .setDeveloperKey(developerKey)
+                    .setCallback(pickerCallback)
+                    .build();
+                picker.setVisible(true);
+            }
+        }
+
+        // A simple callback implementation.
+        function pickerCallback(data) {
+            if (data.action == google.picker.Action.PICKED) {
+                let file = {
+                    "name": data.docs[0].name,
+                    "mimeType": data.docs[0].mimeType,
+                    "url": data.docs[0].url,
+                    "iconUrl": data.docs[0].iconUrl,
+                };
+                document.getElementById('url').value = file.url;
+                document.getElementById('name').value = file.name;
+                document.getElementById('mimeType').value = file.mimeType;
+                document.getElementById('iconUrl').value = file.iconUrl;
+            }
+        }
+    </script>
+
+    <title>{% block title %}Base page{% endblock %}</title>
+</head>
+
+<body>
+    <div class="bg-image d-flex flex-column min-vh-100">
+        <!-- <header class="">
+            {# block header #}
+            {# endblock #}
+        </header> -->
+        <main class="flex-shrink-0">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="container-fluid footer mt-auto">
+            {% block footer %}
+            {% endblock %}
+            <div class="row bg-maroon text-light align-items-end pt-3 text-center text-md-start">
+                <p class="col-md-auto me-auto text_grey">
+                    <span>Designed with </span><span style="color: #dd2e44;">&#10084;&#65039;</span>.
+                    <a class="text-decoration-none text-white" href="https://businesscom.africa" target="_blank"
+                        rel="noopener">By
+                        BusinessCom Consulting
+                    </a>
+                </p>
+                <p class="col-md-auto">&copy; 2021 BSC. All rights reserved</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script> -->
+    <script src="/static/vendor/js/bootstrap.bundle.min.js"></script>
+    <!-- Check overflow -->
+    <script>
+        var docWidth = document.documentElement.offsetWidth;
+
+        [].forEach.call(
+            document.querySelectorAll('*'),
+            function (el) {
+                if (el.offsetWidth > docWidth) {
+                    console.log(el);
+                }
+            }
+        );
+    </script>
+    <!-- The Google API Loader script. -->
+    <script type="text/javascript" src="https://apis.google.com/js/api.js?onclick=loadPicker"></script>
+    <!-- Adds outline to every html element. -->
+    <script>
+        //[].forEach.call($("*"),function(a){a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)})
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Calender App{% endblock %}
+{% block main %}
+<div class="form-body ">
+    <div class="form-content">
+        <div class="form-items container">
+            <div class="d-flex flex-column text-center pb-3 pt-5">
+                <h3 class="col-12 lato-black dark_grey">Schedule a meeting with {{ calender_name }}</h3>
+            </div>
+            <div class="container">
+                <form class="requires-validation lato-regular" action="/schedule/booked/{{ calender_email }}"
+                    method="POST" enctype="multipart/form-data" autocomplete="on" novalidate>
+                    <div
+                        class="row calender-card justify-content-around align-items-center glass mx-auto mx-md-0 mx-xl-auto pt-3 text_grey">
+                        <div class="col-xl-6">
+                            <div class="container-md">
+                                <div class="row align-items-center">
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white" id="prev1"
+                                        disabled><i class="bi bi-arrow-left"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="prev2"><i class="bi bi-arrow-left"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="prev3"><i class="bi bi-arrow-left"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="prev4"><i class="bi bi-arrow-left"></i></button>
+                                    <label class="col-sm-6 col-md-6 col-xl-auto col-9 mx-sm-auto text-center">
+                                        Please select your preferred meeting date and time
+                                    </label>
+
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white" id="next1"><i
+                                            class="bi bi-arrow-right"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="next2"><i class="bi bi-arrow-right"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="next3"><i class="bi bi-arrow-right"></i></button>
+                                    <button type="button" class="col-1 lato-black btn btn-outline-white d-none"
+                                        id="next4" disabled><i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <!--Timezone Hidden from view -->
+                            <div class="row d-none">
+                                <div class="">
+                                    <select class="form-select" name="timezone" id="timezone" required>
+                                        <option selected value="{{ timezone }}">{{ timezone }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container mx-sm-2 my-2">
+                                <!-- Event slots -->
+                                <div class="row">
+                                    {% for dict in dates[:4] %}
+                                    <div class="col-md-3 col-sm-3 col-6 first">
+                                        {% for date in dict.keys() %}
+                                        <h6 class="row lato-bold dark-grey justify-content-center">{{ date }}</h6>
+                                        {% for timeslot in dict[date] %}
+                                        <div class="row g-2 justify-content-center">
+                                            <input type="radio" class="btn-check" name="slot" id="{{ date + timeslot }}"
+                                                autocomplete="off" value="{{ date +'T'+ timeslot }}" required {{
+                                                disabled }}>
+                                            <button class="btn btn-grey text_grey mb-3" type="button">
+                                                <label class="" for="{{ date + timeslot }}">{{ timeslot }}</label>
+                                            </button>
+                                            <div class="valid-feedback d-none">You selected a slot!</div>
+                                            <div class="invalid-feedback d-none">Please select a slot!</div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    {% for dict in dates[4:8] %}
+                                    <div class="col-md-3 col-sm-3 col-6 second d-none">
+                                        {% for date in dict.keys() %}
+                                        <h6 class="row lato-bold dark-grey justify-content-center">{{ date }}</h6>
+                                        {% for timeslot in dict[date] %}
+                                        <div class="row g-2 justify-content-center">
+                                            <input type="radio" class="btn-check" name="slot" id="{{ date + timeslot }}"
+                                                autocomplete="off" value="{{ date +'T'+ timeslot }}" required {{
+                                                disabled }}>
+                                            <button class="btn btn-grey text_grey mb-3" type="button">
+                                                <label class="" for="{{ date + timeslot }}">{{ timeslot }}</label>
+                                            </button>
+                                            <div class="valid-feedback d-none">You selected a slot!</div>
+                                            <div class="invalid-feedback d-none">Please select a slot!</div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    {% for dict in dates[8:12] %}
+                                    <div class="col-md-3 col-sm-3 col-6 third d-none">
+                                        {% for date in dict.keys() %}
+                                        <h6 class="row lato-bold dark-grey justify-content-center">{{ date }}</h6>
+                                        {% for timeslot in dict[date] %}
+                                        <div class="row g-2 justify-content-center">
+                                            <input type="radio" class="btn-check" name="slot" id="{{ date + timeslot }}"
+                                                autocomplete="off" value="{{ date +'T'+ timeslot }}" required {{
+                                                disabled }}>
+                                            <button class="btn btn-grey text_grey mb-3" type="button">
+                                                <label class="" for="{{ date + timeslot }}">{{ timeslot }}</label>
+                                            </button>
+                                            <div class="valid-feedback d-none">You selected a slot!</div>
+                                            <div class="invalid-feedback d-none">Please select a slot!</div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    {% for dict in dates[12:16] %}
+                                    <div class="col-md-3 col-sm-3 col-6 
+                                    fourth d-none">
+                                        {% for date in dict.keys() %}
+                                        <h6 class="row lato-bold dark-grey justify-content-center">{{ date }}</h6>
+                                        {% for timeslot in dict[date] %}
+                                        <div class="row g-2 justify-content-center">
+                                            <input type="radio" class="btn-check" name="slot" id="{{ date + timeslot }}"
+                                                autocomplete="off" value="{{ date +'T'+ timeslot }}" required {{
+                                                disabled }}>
+                                            <button class="btn btn-grey text_grey mb-3" type="button">
+                                                <label class="" for="{{ date + timeslot }}">{{ timeslot }}</label>
+                                            </button>
+                                            <div class="valid-feedback d-none">You selected a slot!</div>
+                                            <div class="invalid-feedback d-none">Please select a slot!</div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-1 border-light border-5 rounded text-center">
+                            |
+                        </div> -->
+                        <div class="col-xl-4">
+                            <div class="form text_grey {{ display[1] }}">
+                                <!-- User names -->
+                                <div class="row my-md-3 my-2 px-1">
+                                    <div class="col-md-6 my-2">
+                                        <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="text"
+                                            name="firstname" placeholder="First Name" required>
+                                        <div class="valid-feedback">First Name field is valid!</div>
+                                        <div class="invalid-feedback">First Name field cannot be blank!</div>
+                                    </div>
+                                    <div class="col-md-6 my-2">
+                                        <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="text"
+                                            name="lastname" placeholder="Last Name" required>
+                                        <div class="valid-feedback">Last Name field is valid!</div>
+                                        <div class="invalid-feedback">Last Name field cannot be blank!</div>
+                                    </div>
+                                </div>
+                                <!-- Company name -->
+                                <div class="row my-md-3 my-2 mx-1">
+                                    <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="text"
+                                        name="company" placeholder="Company" required>
+                                    <div class="valid-feedback">Company field is valid!</div>
+                                    <div class="invalid-feedback">Company field cannot be blank!</div>
+                                </div>
+                                <!-- user email  -->
+                                <div class="row my-md-3 my-2 mx-1">
+                                    <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="email"
+                                        name="email" placeholder="E-mail Address" required>
+                                    <div class="valid-feedback">Email field is valid!</div>
+                                    <div class="invalid-feedback">Email field cannot be blank!</div>
+                                </div>
+                                <!-- user Phone Number -->
+                                <div class="row my-md-3 my-2 mx-1">
+                                    <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="tel"
+                                        maxlength="15" name="phone" placeholder="(+254)-XXX-XXX-XXX" required>
+                                    <div class="valid-feedback">Phone Number field is valid!</div>
+                                    <div class="invalid-feedback">Phone Number field cannot be blank!</div>
+                                </div>
+                                <!-- event description -->
+                                <div class="row my-md-3 my-2 mx-1">
+                                    <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="text"
+                                        name="comments" placeholder="Comments" autocomplete="off" required>
+                                    <div class="valid-feedback">Comments field is valid!</div>
+                                    <div class="invalid-feedback">Comments field cannot be blank!</div>
+                                </div>
+                                <!-- User Documents to share -->
+                                <div class="row my-md-3 my-2 mx-1 d-none">
+                                    <!-- drive access -->
+                                    <button onclick="loadPicker()" class="btn bg-maroon col me-3 text-white"
+                                        type="button">
+                                        <img class="pe-2" src="/static/public/img/Google Drive Button Icon.svg"
+                                            width="24px" alt="drive icon" srcset="">
+                                        Add Drive File
+                                    </button>
+                                    <!-- file name -->
+                                    <input class="form-control-plaintext rounded-3 col ms- ps-22 bg-white" type="text"
+                                        name="name" id="name" placeholder="Selected File Name" readonly>
+                                    <!-- <div class="valid-feedback d-none">Documents field is optional!</div> -->
+                                </div>
+                                <div class="row my-md-3 my-2 mx-1 d-none">
+                                    <!-- file url -->
+                                    <input class="form-control-plaintext rounded-3" type=" ps-2url" name="url" id="url"
+                                        placeholder="file URL">
+                                </div>
+                                <div class="row my-md-3 my-2 mx-1 d-none">
+                                    <!-- file icon url -->
+                                    <input class="form-control-plaintext rounded-3" type=" ps-2url" name="iconUrl"
+                                        id="iconUrl" placeholder="Icon URL">
+                                </div>
+                                <div class="row my-md-3 my-2 mx-1 d-none">
+                                    <!-- file mimetype -->
+                                    <input class="form-control-plaintext rounded-3" type=" ps-2text" name="mimeType"
+                                        id="mimeType" placeholder="Mime Type">
+                                </div>
+                                <!-- Other event attendees emails -->
+                                <div class="row my-md-3 my-2 mx-1">
+                                    <input class="form-control-plaintext rounded-3 bg-grey ps-2" type="email"
+                                        name="others"
+                                        placeholder="Enter comma ( , ) separated emails of other attendees"
+                                        autocomplete="off" multiple>
+                                    <div class="valid-feedback d-none">Other attendees field is optional!</div>
+                                </div>
+                                <div class="form-check my-md-3 my-2 pe-auto ps-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">I confirm that all data is
+                                        correct</label>
+                                    <div class="invalid-feedback">Please confirm that the entered data is
+                                        correct!
+                                    </div>
+                                </div>
+                                <div class="form-button text-start my-3">
+                                    <a href=/form>
+                                        <button id="submit" type="submit"
+                                            class="btn btn-maroon text-white px-3">Schedule
+                                            meeting</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form text_grey text-center {{ display[0] }} pb-5 pb-sm-4 pb-md-0">
+                                <div class="">
+                                    <img src="/static/public/img/Approve.svg" width="50px" alt="approved" srcset="">
+                                </div>
+                                <p class="pt-3">
+                                    Your meeting has been scheduled on
+                                </p>
+                                <div class="lato-bold dark_grey fs-1">
+                                    <div>
+                                        {{ booked_date }}
+                                    </div>
+                                    <div class="fs-3">
+                                        {{ booked_time }}
+                                    </div>
+                                </div>
+                                <div class="pt-3">
+                                    <button type="button" class="btn btn-maroon px-5">
+                                        <a class="text-decoration-none text-white" href="{{ link }}"
+                                            target="_blank">View in calender</a>
+                                    </button>
+                                </div>
+                                <div class="pt-3">
+                                    <button type="button" class="btn btn-maroon px-4 px-sm-3">
+                                        <a class="text-decoration-none text-white"
+                                            href="/schedule/{{ calender_email }}">Book another meeting</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<div class="row align-items-center pb-4 pt-2">
+    <div class="col-auto me-auto">
+        <img class="" height="30rem" src="/static/public/img/Copper Logo.svg" alt="Copper Logo">
+    </div>
+    <div class="col-auto">
+        <img class="" height="30rem" src="/static/public/img/Google Cloud Logo.svg" alt="Google Cloud Logo">
+    </div>
+</div>
+{% endblock %}

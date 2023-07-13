@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% block title %}Calender App{% endblock %}
+{% block main %}
+<div class="form-body min-vh-xxl-100">
+    <div class="form-content">
+        <div class="form-items ">
+            <div class="container-md">
+                <div class="row justify-content-md-center dark_grey ">
+                    <div class="row justify-content-sm-center text-center pt-3 pt-xxl-5 lato-black">
+                        <p class="fs-1">
+                            <span id="hour" class="dark_grey"></span>
+                            <span id="colon" class="dark_grey"></span>
+                            <span id="minute" class="text_maroon"></span>
+                        </p>
+                    </div>
+                    <div class="row justify-content-sm-center text-center">
+                        <p id="date" class="dark_grey lato-bold fs-4"></p>
+                    </div>
+                    <div class="row justify-content-md-center text-center">
+                        <p id="zone" class="timezone text_grey fs-5"></p>
+                    </div>
+                </div>
+                <div
+                    class="calender-card row justify-content-evenly p-sm-4 p-xxl-5 py-3 my-xxl-5 glass mx-auto w-sm-75 text-center text-md-start">
+                    <div class="col-md col-xxl-4 align-self-center ms-md-5 mx-auto me-md-0 d-md-block text-center">
+                        <img class="calender-image" src="/static/public/img/Calendar-Image.png" alt="calender Image">
+
+                    </div>
+                    <div class="col-md col-xxl-6 align-self-center lato-regular py-xxl-3 my-auto">
+                        <div class="container text_grey">
+                            <h1>You are tying to access a calender that does not exits</h1>
+                        </div>
+                        <div class="container">
+                            <h1>Please key in the email of the calender you are trying to access on the address bar
+                                after schedule/</h1>
+                            <!-- <a href="http://bookme.businesscom.africa/schedule/gideon@businesscom.africa">Support</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<div class="row align-items-center pb-3 pt-2">
+    <div class="col-auto d-none d-sm-block">
+        <img class="" height="30rem" src="/static/public/img/Copper Logo.svg" alt="Copper Logo">
+    </div>
+    <div class="col-auto mx-auto">
+        <img class="" height="80rem" src="/static/public/img/BusinessCOm Logo.svg" alt="BusinessCom Logo">
+    </div>
+    <div class="col-auto d-none d-sm-block">
+        <img class="" height="30rem" src="/static/public/img/Google Cloud Logo.svg" alt="Google Cloud Logo">
+    </div>
+</div>
+{% endblock %}

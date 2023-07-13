@@ -1,0 +1,30 @@
+# Application configurations
+APP:
+    ENVIRONMENT: test
+    DEBUG: True
+    # Only accept True or False
+
+# Database credentials.
+DATABASE:
+    USERNAME: db user name
+    PASSWORD: db pass
+    HOST: db host
+    PORT: 5432
+    DB: db name
+
+# Google API scopes.
+SCOPES:
+    [
+        https://www.googleapis.com/auth/calendar.readonly,
+        https://www.googleapis.com/auth/calendar,
+        https://www.googleapis.com/auth/calendar.events.readonly,
+        https://www.googleapis.com/auth/calendar.events,
+        https://www.googleapis.com/auth/admin.directory.user,
+    ]
+# Test emails
+EMAILS: 
+    [
+        philip@businesscomtest.com,
+        lab1@businesscomtest.com
+    ]
+

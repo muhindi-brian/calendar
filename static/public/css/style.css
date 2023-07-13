@@ -1,0 +1,252 @@
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('./fonts/Lato-Regular.eot');
+    src: local('Lato Regular'), local('Lato-Regular'),
+        url('./fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Lato-Regular.woff2') format('woff2'),
+        url('./fonts/Lato-Regular.woff') format('woff'),
+        url('./fonts/Lato-Regular.ttf') format('truetype'),
+        url('./fonts/Lato-Regular.svg#Lato-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('./fonts/Lato-Bold.eot');
+    src: local('Lato Bold'), local('Lato-Bold'),
+        url('./fonts/Lato-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Lato-Bold.woff2') format('woff2'),
+        url('./fonts/Lato-Bold.woff') format('woff'),
+        url('./fonts/Lato-Bold.ttf') format('truetype'),
+        url('./fonts/Lato-Bold.svg#Lato-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato-Black';
+    src: url('./fonts/Lato-Black.eot');
+    src: local('Lato Black'), local('Lato-Black'),
+        url('./fonts/Lato-Black.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Lato-Black.woff2') format('woff2'),
+        url('./fonts/Lato-Black.woff') format('woff'),
+        url('./fonts/Lato-Black.ttf') format('truetype'),
+        url('./fonts/Lato-Black.svg#Lato-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+html {
+    overflow-x: hidden !important; 
+    max-width: 100% !important;
+    font-family: 'Lato Regular';
+}
+
+.bg-image {
+    background-image: url('/static/public/img/Background.png');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.bi-arrow-right,
+.bi-arrow-left {
+    color: #ae2427;
+}
+
+.form-check>input,
+.form-check>label {
+    cursor: pointer;
+}
+
+.lato-regular {
+    font-family: 'Lato-Regular';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.lato-bold {
+    font-family: 'Lato';
+    font-weight: bold;
+    font-style: normal;
+    /* font-size: 2rem; */
+}
+
+.lato-black {
+    font-family: 'Lato-Black';
+    font-weight: 900;
+    font-style: normal;
+    /* font-size: 5rem; */
+}
+
+.bg-maroon {
+    /* Maroon: CC2128 */
+    background-color: #ae2427;
+}
+
+.bg-grey {
+    background-color: #f2f2f2;
+}
+
+.dark_grey {
+    /* Dark Gray- 666666 */
+    color: #666;
+} 
+
+.text_grey,
+.text_grey:hover {
+    /* Light Text Gray- 999999 */
+    color: #999;
+}
+
+.text_maroon {
+    color: #ae2427;
+}
+
+.btn-grey {
+    /* button Gray- F2F2F2 */
+    border-radius: 10px;
+    background: #f2f2f2;
+    box-shadow:  10px 10px 20px #cecece,
+                -10px -10px 20px #ffffff;
+}
+
+.btn-grey:active {
+    border-radius: 10px;
+    background: #ae2427;
+    box-shadow:  10px 10px 20px #941f21,
+                -10px -10px 20px #c8292d;
+}
+
+.btn-maroon {
+    border-radius: 10px;
+    background: #ae2427;
+    box-shadow: inset 10px 10px 20px #941f21,
+                inset -10px -10px 20px #c8292d;
+}
+
+.curved-underline {
+    position: relative;
+    right: 36%;
+}
+
+@media screen and (max-width: 1600px) {
+    .curved-underline {
+        position: relative;
+        right: 35%;
+    }
+}
+
+@media screen and (max-width: 1536px) {
+    .curved-underline {
+        position: relative;
+        right: 35%;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .curved-underline {
+        position: relative;
+        right: 33%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .curved-underline {
+        position: relative;
+        right: 32%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .curved-underline {
+        position: relative;
+        right: 28%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .curved-underline {
+        position: relative;
+        right: 17%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .curved-underline {
+        position: relative;
+        right: 16%;
+    }
+}
+
+@media screen and (max-width: 767.98px) {
+    .curved-underline {
+        position: relative;
+        right: 0;
+    }
+}
+
+.calender-card {
+    border: solid white 1px;
+    border-radius: 1rem;
+}
+
+.calender-image {
+    height: 12rem;
+}
+
+.form-check-input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.form-check-label {
+    position: relative;
+    cursor: pointer;
+}
+
+.form-check-label:before {
+    content:'';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid #ae2427;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.form-check-input:checked + .form-check-label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #ae2427;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+.glass {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+}

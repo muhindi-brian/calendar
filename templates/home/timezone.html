@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% block title %}Calender App{% endblock %}
+{% block main %}
+<div class="form-body min-vh-xxl-100">
+    <div class="form-content">
+        <div class="form-items ">
+            <div class="container-md">
+                <div class="row justify-content-md-center dark_grey ">
+                    <div class="row justify-content-sm-center text-center pt-3 pt-xxl-5 lato-black">
+                        <p class="fs-1">
+                            <span id="hour" class="dark_grey"></span>
+                            <span id="colon" class="dark_grey"></span>
+                            <span id="minute" class="text_maroon"></span>
+                        </p>
+                    </div>
+                    <div class="row justify-content-sm-center text-center">
+                        <p id="date" class="dark_grey lato-bold fs-4"></p>
+                    </div>
+                    <div class="row justify-content-md-center text-center">
+                        <p id="zone" class="timezone text_grey fs-5"></p>
+                    </div>
+                </div>
+                <div class="calender-card row justify-content-evenly p-sm-4 p-xxl-5 py-3 my-xxl-5 glass mx-auto w-sm-75 text-center text-md-start">
+                    <div class="col-md col-xxl-4 align-self-center ms-md-5 mx-auto me-md-0 d-md-block text-center">
+                        <img class="calender-image" src="/static/public/img/Calendar-Image.png" alt="calender Image">
+                    </div>
+                    <div class="col-md col-xxl-6 align-self-center lato-regular py-xxl-3 my-auto">
+                        <div class="container text_grey">
+                            <div class="row">
+                                <h1 class="">
+                                    Schedule a
+                                    <span class="text-capitalize d-block lato-bold dark_grey">
+                                        meeting Today with {{ calender_name }}
+                                    </span>
+                                    <img src="{{ calender_photo }}" alt="user photo" srcset="">
+                                </h1>
+                            </div>
+                            <div class="row curved-underline ">
+                                <img class="align-self-start" src="/static/public/img/Curved Underline.svg" height="25rem" alt="curved underline">
+                            </div>
+                            <div class="row py-2 py-xxl-3">
+                                <p class="">
+                                    Select timezone below if provided is
+                                    <span class="d-block">
+                                        not to your liking
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <form class="requires-validation" action="/schedule/{{ calender_email }}" method="POST" novalidate>
+                                <div class="row align-items-center">
+                                    <div class="col-6 text_grey">
+                                        <select class="form-select rounded-pill w-100 text_grey" id="timezone" name="timezone" required>
+                                            <option selected  value="">Timezone</option>
+                                            {% for time in timezones %}
+                                            {% if "Etc/" not in time %}
+                                                <option value="{{ time }}">{{ time }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <!-- <div class="valid-feedback">
+                                            You selected a timezone!
+                                        </div> -->
+                                        <div class="invalid-feedback">
+                                            Please select a timezone!
+                                        </div>
+                                    </div>
+                                    <div class="form-button col-6">
+                                        <a href=/form>
+                                            <button class="btn rounded-pill w-100 btn-maroon text-white" id="submit" type="submit" class="">Next</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<div class="row align-items-center pb-3 pt-2">
+    <div class="col-auto d-none d-sm-block">
+        <img class="" height="30rem" src="/static/public/img/Copper Logo.svg" alt="Copper Logo">
+    </div>
+    <div class="col-auto mx-auto">
+        <img class="" height="80rem" src="/static/public/img/BusinessCOm Logo.svg" alt="BusinessCom Logo">
+    </div>
+    <div class="col-auto d-none d-sm-block">
+        <img class="" height="30rem" src="/static/public/img/Google Cloud Logo.svg" alt="Google Cloud Logo">
+    </div>
+</div>
+{% endblock %}
